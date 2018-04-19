@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Where I'm Climbing</title>
+
+    <!-- Custom Font - Change 'Muli' to the font you want -->
+    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Custom CSS inside CSS folder -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+      <div class="container">
+          <div class="title">
+            Gunks Climbs
+          </div>
+          <div id="dashboard">
+              <!-- <div id="barChart-div">
+                <canvas id="barChart" width="800" height="400"></canvas>
+              </div> -->
+          </div>
+          <div id="cardSort">
+            <select name="Sort by" id="sortBy" onchange="sortCards()">
+                <option value="route">Route Name</option>
+                <option value="stars">Stars</option>
+                <option value="date">Date</option>
+                <option value="grade">Grade</option>
+            </select>
+            <select name="Order" id="sortOrder" onchange="sortCards()" style="margin-left: 5px;">
+              <option value="descending">Desc</option>
+              <option value="ascending">Asc</option>
+            </select>
+          </div>
+          <div id="cardHolder"></div>
+
+    </div>
+  </body>
+
+    <!-- JQuery script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--<script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    </script>-->
+
+    <!-- CUSTOM JS -->
+    <script src="js/main.js"></script>
+</html>
