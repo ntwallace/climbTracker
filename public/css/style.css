@@ -34,6 +34,32 @@ body {
     color: #91ECD1;
 }
 
+.dashboard {
+    display:flex;
+    flex-direction: row;
+}
+
+#barChart-div {
+    width:61%;
+    height: 300px;
+    padding: 10px;
+    padding-left: 48px;
+}
+
+#donutChart-div{
+    width:34%;
+    height:300px;
+    padding: 10px;
+    margin-right: 25px;
+}
+
+#mapChart-div {
+    width: 95%;
+    height: 300px;
+    padding: 10px;
+    padding-left: 48px;
+}
+
 #cardHolder {
     display: flex;
     flex-direction: row;
@@ -47,7 +73,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 25px;
-    margin-left: 30px;
+    margin-left: 32px;
 }
 
 .card {
@@ -95,26 +121,32 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 }
 
 .ratingContainer {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-content: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 10px;
 }
 
 .stats {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
     padding: 16px 0;
     align-items: center;
 }
 
 .statsHolder {
     text-align: center;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.dateContainer {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
 }
 
 .regularFont {
