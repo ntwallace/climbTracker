@@ -1,4 +1,4 @@
-var jsonData = [
+let jsonData = [
   {
     "date": 2016,
     "mountainProjectID": 105888225,
@@ -75,7 +75,7 @@ var jsonData = [
     "route": "High Corner",
     "grade": 5.5,
     "gradeModifier": "",
-    "protection": "PG",
+    "protection": "PG-13",
     "type": "Trad",
     "myRole": "Second",
     "partner": "Justin Cina",
@@ -195,14 +195,136 @@ var jsonData = [
     "repeats": 1,
     "notes": ""
   }
+  {
+    "date": "4/13/18",
+    "mountainProjectID": 105968655,
+    "route": "Dennis",
+    "grade": 5.5,
+    "gradeModifier": "",
+    "protection": "PG",
+    "type": "Trad",
+    "myRole": "Lead",
+    "partner": "Chris",
+    "stars": 3,
+    "repeats": 1,
+    "notes": ""
+  }
 ]
 
 let sortBy = 'route';
 let sortOrder = 'descending';
 
+let barData = [];
+let donutData = [];
+let mapData = [];
+
 
 function init() {
-    renderCards(jsonData);
+  renderCharts();
+  renderCards(jsonData);
+}
+
+function renderCharts(){
+  buildChartData();
+  buildBarChart();
+  buildDonutChart();
+  buildMapChart();
+}
+
+function buildChartData() {
+  let tradCount = 0, sportCount = 0, trCount = 0;
+  barData.push(['Route', 'Grade']);
+  donutData.push(['Route', 'Type']);
+  mapData.push(['City', 'Count']);
+
+  jsonData.forEach(function(e) {
+    barData.push([e.route, e.grade]);
+
+    if (e.type == "Trad") {
+      tradCount++;
+    } else if (e.type == "Sport") {
+      sportCount++;
+    } else {
+      trCount++;
+    }
+  });
+
+  donutData.push(['Sport', sportCount],['Trad', tradCount],['TR', trCount]);
+  mapData.push(['New Paltz, NY', jsonData.length]);
+  console.log(mapData);
+}
+
+function buildBarChart() {
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    let data = google.visualization.arrayToDataTable(barData);
+
+    var options = {
+      title: 'Climbs, by difficulty',
+      legend: { position: 'none' },
+      colors: ['#4285F4'],
+
+      hAxis: {
+        ticks: [5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
+      },
+
+      label: {position: 'top', textStyle: {color: 'black', fontSize: 16}},
+
+      histogram: {
+        bucketSize: 0.1,
+        maxNumBuckets: 100,
+        minValue: 5.1,
+        maxValue: 5.9
+      }
+    };
+
+    var chart = new google.visualization.Histogram(document.getElementById('barChart-div'));
+    chart.draw(data, options);
+  }
+}
+
+function buildDonutChart() {
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(donutData);
+
+    var options = {
+      title: 'Climbs, by type',
+      pieHole: 0.35,
+
+      label: {position: 'top', textStyle: {color: 'black', fontSize: 16}},
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutChart-div'));
+    chart.draw(data, options);
+  }
+}
+
+function buildMapChart() {
+  google.charts.load('current', {
+       'packages': ['geochart'],
+       'mapsApiKey': ' AIzaSyB--A0zLqbECZkdTGg6cQaIdz9HQ4lB53I'
+     });
+  google.charts.setOnLoadCallback(drawMarkersMap);
+
+  function drawMarkersMap() {
+    var data = google.visualization.arrayToDataTable(mapData);
+
+    var options = {
+      magnifyingGlass: {enable: true, zoomFactor: 7.5},
+      region: 'US-NY',
+      resolution: 'provinces',
+      displayMode: 'markers',
+      colorAxis: {colors: ['#232F5B']},
+      label:  {textStyle: {color: 'blue', fontSize: 16}}
+    };
+
+    var chart = new google.visualization.GeoChart(document.getElementById('mapChart-div'));
+    chart.draw(data, options);
+  };
+
 }
 
 function renderCards(data) {
@@ -239,15 +361,14 @@ function sortCards() {
     sortOrder = $('#sortOrder').val();
   }
 
-  // sortBy = "Stars"
   let aName = 'a.' + sortBy;
   let bName = 'b.' + sortBy;
   console.log(bName);
   jsonData.sort(function(a,b){
     if(sortOrder === 'descending') {
-      return b[sortBy] < a[sortBy];
-    } else {
       return b[sortBy] > a[sortBy];
+    } else {
+      return b[sortBy] < a[sortBy];
     }
   });
 
@@ -264,17 +385,24 @@ function buildCard(cardData, mpData){
                 '<div class="largeFont routeName">' + cardData.route + '</div>' +
               '</div>' +
               '<div class="stats border">' +
-                '<div class="statsHolder">' +
+                '<div class="statsHolder box">' +
                   '<div class="largeFont">' + emojiStars + '</div>' +
-                  '<div class="ratingContainer">' +
-                    '<div class="largeFont">' + cardData.grade + '</div>' +
-                    '<div class="regularFont">' + cardData.gradeModifier + cardData.protection + '</div>' +
-                  '</div>' +
                 '</div>' +
+                '<div class="ratingContainer border">' +
+                  '<div class="largeFont">' + cardData.grade + cardData.gradeModifier + '</div>' +
+                  '<div class="regularFont">' + cardData.protection + '</div>' +
+                '</div>' +
+                '<div class="dateContainer">'+
+                  '<div class="regularFont">' + cardData.date + '</div>' +
+                  '<div class="regularFont">' + cardData.type + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>'
+                /*'</div>' +
               '</div>' +
               '<div class="statsHolder">'+
                 '<div class="regularFont">' + cardData.date + '</div>' +
-              '</div>' /*+
+              '</div>' +
               '<div class="stats border">'+
                 '<div class="statsHolder">'+
                 '</div>'+
