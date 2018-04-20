@@ -194,7 +194,7 @@ let jsonData = [
     "stars": 3,
     "repeats": 1,
     "notes": ""
-  }
+  },
   {
     "date": "4/13/18",
     "mountainProjectID": 105968655,
