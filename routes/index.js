@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 // our db model
-var Climb = require("../models/model.js");
+var Climb = require("/models/model.js");
 
 // simple route to render am HTML form that can POST data to our server
 // NOTE that this is not a standard API route, and is really for testing
@@ -53,7 +53,7 @@ router.post('/api/create', function(req, res){
     // pull out the information from the req.body
     var name = req.body.date;
     var age = req.body.location.split(",");
-    var route = req.body.route = reqreq.body.route;
+    var route = req.body.route;
     var grade = req.body.grade.split(",");
     var type = req.body.type;
     var myRole = req.body.myRole;
@@ -71,7 +71,7 @@ router.post('/api/create', function(req, res){
         location3: location3,
         location4: location4
       },
-      route: tags,
+      route: route,
       grade: {
         number: number,
         modifier: modifier,
