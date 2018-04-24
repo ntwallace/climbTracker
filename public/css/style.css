@@ -4,9 +4,66 @@
 
 body {
     height:100vh;
-    background-color: #000080;
+    background-color: #fff;
     font-family: 'Cabin', sans-serif;
-    color: #232F5B;
+}
+
+
+.title {
+  font-size: 35px;
+  font-weight: 900;
+  padding: 20px;
+  color: #fff;
+}
+
+.option {
+  margin-top:36px;
+  font-size: 20px;
+  padding-left: 22px;
+  color: #fff;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 64px 32px;
+}
+
+.dashboard {
+  background-color: #bbb;
+  padding: 16px;
+}
+
+.dashboard-card {
+    background: #FFF;
+    border: 1px solid #E9EAEE;
+    border-radius: 8px;
+    max-width: 360px;
+    min-width: 320px;
+    margin-right: 16px;
+    margin-top: 16px;
+
+    padding: 16px;
+    text-align: center;
+}
+
+.dc-grade {
+  font-size: 48px;
+}
+
+.dc-gradeModifier {
+  font-size: 20px;
+}
+
+.dc-title {
+  font-size: 20px;
+}
+
+.chart {
+
+}
+
+.row {
+  margin:0 !important;
 }
 
 .category {
@@ -16,70 +73,21 @@ body {
   font-weight: bold;
 }
 
-.container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 64px 32px;
+.dropdown {
+  align-items: left;
+  margin-top: 35px;
+  margin-left: 32px;
 }
 
-.title {
-    font-size: 80px;
-    font-weight: 900;
-    line-height: 1.1;
-    color: #fff;
-    text-align: center;
-}
-
-.title span {
-    color: #91ECD1;
-}
-
-.dashboard {
-    display:flex;
-    flex-direction: row;
-}
-
-#barChart-div {
-    width:61%;
-    height: 300px;
-    padding: 10px;
-    padding-left: 48px;
-}
-
-#donutChart-div{
-    width:34%;
-    height:300px;
-    padding: 10px;
-    margin-right: 25px;
-}
-
-#mapChart-div {
-    width: 95%;
-    height: 300px;
-    padding: 10px;
-    padding-left: 48px;
-}
-
-#cardHolder {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 0;
-    justify-content: center;
-}
-
-#cardSort {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 25px;
-    margin-left: 32px;
+.cards {
+  background: #bbb;
+  margin-top: 0;
 }
 
 .card {
-    background: #FFFFFF;
-    border: 1px solid #E9EAEE;
-    border-radius: 8px;
+    background: #FFF;
+    /*border: 1px solid #E9EAEE;
+    border-radius: 8px;*/
     max-width: 360px;
     min-width: 320px;
     margin-right: 16px;
@@ -89,24 +97,22 @@ body {
     align-items: center;
 }
 
-.border {
-    border-bottom: 1px solid #EEEFF2;
+.cardSort {
+    margin-top: 20px;
 }
 
-.header {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+.card-header {
+  background-color: #fff;
 }
 
-.header h1 {
+.card-header h1 {
     font-weight: 900;
     font-size: 18px;
     margin-top: 16px;
     margin-bottom: 16px;
 }
 
-.header img {
+.card-header img {
     border-radius: 50%;
     width: 160px;
     height: 160px;
@@ -115,13 +121,7 @@ body {
 .routeName {
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.box {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  text-align: center;
 }
 
 .ratingContainer {
@@ -136,21 +136,21 @@ body {
     align-items: center;
 }
 
-.statsHolder {
+.routeStars {
     text-align: center;
-    display: flex;
     justify-content: center;
 }
 
 .dateContainer {
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
     padding-top: 15px;
 }
 
 .regularFont {
     font-size: 18px;
+}
+
+.mediumFont {
+  font-size: 24px;
 }
 
 .largeFont {
@@ -161,23 +161,17 @@ body {
     font-size: 48px;
 }
 
+#cardHolder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+    justify-content: center;
+}
+
 .subtext {
     opacity: 0.5;
     font-size: 16px;
-}
-
-.jsViz {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  align-items: center;
-}
-
-.barChart {
-    flex-basis: 60%;
-    height: 8px;
-    background-color: #ECECEC;
-    position: relative;
 }
 
 .bar {
@@ -187,17 +181,6 @@ body {
     width: 80%;
 }
 
-.jsStats {
-    flex-basis: 30%;
-    margin-left: 12px;
-    justify-content: center;
-    text-align: center;
-}
-
-.interests {
-    padding: 16px 0 8px;
-}
-
 .heading {
     font-size: 12px;
     color: rgba(35,47,91,0.50);
@@ -205,24 +188,6 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
-}
-
-.tagHolder {
-    align-items: center;
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-}
-
-.tag {
-    font-size: 10px;
-    text-align: center;
-    border-radius: 100px;
-    letter-spacing: 1.5px;
-    background-color: #ECECEC;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    margin: 0 6px;
 }
 
 @media (max-width: 767px) {

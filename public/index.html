@@ -1,60 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>What I'm Climbing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Custom Font - Change 'Muli' to the font you want -->
+    <title>Climbing Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- Custom CSS inside CSS folder -->
     <link rel="stylesheet" href="css/style.css">
   </head>
+
   <body>
       <div class="container">
-          <div class="title">
-            Climbing @ The Gunks
+
+        <!-- Top Nav Bar -->
+        <nav class="navbar navbar-toggleable-md navbar-expand-md navbar-dark bg-dark">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand title" href=''>Climb Tracker</a>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li id="dashboard-link" class="nav-item active">
+                  <a class="nav-link" href="#" class="option" onclick="showDash()">Dashboard</a>
+              </li>
+              <li id="cards-link" class="nav-item" style="margin-right:30px;">
+                  <a class="nav-link" href="#" class="option" onclick="showCards()">Cards</a>
+              </li>
+            </ul>
           </div>
-          <br />
-          <br />
-          <br />
-          <div id="dashboard-row1" class="dashboard row 1">
-          	<div id="barChart-div" style=""></div>
-            <div id="donutChart-div" style="margin-right:30px;"></div>
+        </nav>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+          <div id="row1" class="dashboard row">
+            <div class="dashboard-card">
+              <div class="row justify-content-center">
+                <div class="extraLargeFont">5.10</div><div class="mediumFont d-flex align-self-end" style="margin-bottom: 10px;">c</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="regularFont">Sport</div>
+              </div>
+            </div>
+            <div class="col-md dashboard-card">
+              <div class="row justify-content-center">
+                <div class="extraLargeFont">5.6</div><div class="mediumFont d-flex align-self-end" style="margin-bottom: 10px; margin-left: 3px;">+</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="regularFont">Trad</div>
+              </div>
+            </div>
+            <div class="col-md dashboard-card">
+              <div class="row justify-content-center">
+                <div class="mediumFont d-flex align-self-end" style="margin-bottom: 10px; margin-right: 4px;">v</div><div class="extraLargeFont">4</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="regularFont">Boulder</div>
+              </div>
+            </div>
           </div>
-          <div id="dashboard-row2" class="dashboard row 2">
-          	<div id="mapChart-div" style=""></div>
+          <div id="row2" class="dashboard row">
+            <div class="col-md">
+              <div id="barChart-div" class="chart"></div>
+            </div>
+            <div class="col-md">
+              <div id="donutChart-div" class="chart"></div>
+            </div>
           </div>
-          <br />
-          <br />
-          <div id="cardSort">
-            <select name="Sort by" id="sortBy" onchange="sortCards()">
+          <div id="row3" class="dashboard row">
+            <div class="col-md">
+              <div id="mapChart-div" style="height: 300px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card view of climbs -->
+        <div class="cards" style="display: none;">
+          <div class="cardSort row">
+            <div class="dropdown">
+              <select name="Sort by" id="sortBy" onchange="sortCards()">
                 <option value="route">Route Name</option>
                 <option value="stars">Stars</option>
                 <option value="date">Date</option>
                 <option value="grade">Grade</option>
-            </select>
-            <select name="Order" id="sortOrder" onchange="sortCards()" style="margin-left: 5px;">
-              <option value="descending">Desc</option>
-              <option value="ascending">Asc</option>
-            </select>
+              </select>
+              <select name="Order" id="sortOrder" onchange="sortCards()">
+                <option value="descending">Desc</option>
+                <option value="ascending">Asc</option>
+              </select>
+            </div>
           </div>
           <div id="cardHolder"></div>
+        </div>
 
     </div>
   </body>
 
-    <!-- JQuery script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="js/main.js"></script>
 
-
-    <!-- CUSTOM JS -->
-    <script src="js/main.js"></script>
 </html>

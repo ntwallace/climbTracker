@@ -214,31 +214,54 @@ let jsonData = [
 let sortBy = 'route';
 let sortOrder = 'descending';
 
-let barData = [];
-let donutData = [];
-let mapData = [];
+function showDash() {
+  $('.cards').css('display', 'none');
+  $('.dashboard').css('display', '');
+  $('#dashboard-link').toggleClass('active');
+  $('#cards-link').toggleClass('active');
+}
 
+function showCards() {
+  $('.dashboard').css('display', 'none');
+  $('.cards').css('display', '');
+  $('#cards-link').toggleClass('active');
+  $('#dashboard-link').toggleClass('active');
+}
 
 function init() {
-  renderCharts();
+  //let jsonData = getData();
+  renderCharts(jsonData);
   renderCards(jsonData);
 }
 
-function renderCharts(){
-  buildChartData();
-  buildBarChart();
-  buildDonutChart();
-  buildMapChart();
+function getData() {
+  $.getJSON('/api/get', function(data) {
+      console.log(data);
+      return data;
+  });
 }
 
-function buildChartData() {
-  let tradCount = 0, sportCount = 0, trCount = 0;
-  barData.push(['Route', 'Grade']);
-  donutData.push(['Route', 'Type']);
-  mapData.push(['City', 'Count']);
+function renderCharts(data){
+  let { barData, donutData, mapData } = buildChartData(data);
+  buildBarChart(barData);
+  buildDonutChart(donutData);
+  buildMapChart(mapData);
+}
 
-  jsonData.forEach(function(e) {
-    barData.push([e.route, e.grade]);
+function buildChartData(data) {
+  let chartData = {
+    barData: [],
+    donutData: [],
+    mapData: []
+  };
+
+  let tradCount = 0, sportCount = 0, trCount = 0;
+  chartData.barData.push(['Route', 'Grade']);
+  chartData.donutData.push(['Route', 'Type']);
+  chartData.mapData.push(['City', 'Count']);
+
+  data.forEach(function(e) {
+    chartData.barData.push([e.route, e.grade]);
 
     if (e.type == "Trad") {
       tradCount++;
@@ -249,16 +272,17 @@ function buildChartData() {
     }
   });
 
-  donutData.push(['Sport', sportCount],['Trad', tradCount],['TR', trCount]);
-  mapData.push(['New Paltz, NY', jsonData.length]);
-  console.log(mapData);
+  chartData.donutData.push(['Sport', sportCount],['Trad', tradCount],['TR', trCount]);
+  chartData.mapData.push(['New Paltz, NY', data.length]);
+
+  return chartData;
 }
 
-function buildBarChart() {
+function buildBarChart(data) {
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
-    let data = google.visualization.arrayToDataTable(barData);
+    let dataSet = google.visualization.arrayToDataTable(data);
 
     var options = {
       title: 'Climbs, by difficulty',
@@ -280,15 +304,15 @@ function buildBarChart() {
     };
 
     var chart = new google.visualization.Histogram(document.getElementById('barChart-div'));
-    chart.draw(data, options);
+    chart.draw(dataSet, options);
   }
 }
 
-function buildDonutChart() {
+function buildDonutChart(data) {
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable(donutData);
+    var dataSet = google.visualization.arrayToDataTable(data);
 
     var options = {
       title: 'Climbs, by type',
@@ -298,11 +322,11 @@ function buildDonutChart() {
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donutChart-div'));
-    chart.draw(data, options);
+    chart.draw(dataSet, options);
   }
 }
 
-function buildMapChart() {
+function buildMapChart(data) {
   google.charts.load('current', {
        'packages': ['geochart'],
        'mapsApiKey': ' AIzaSyB--A0zLqbECZkdTGg6cQaIdz9HQ4lB53I'
@@ -310,7 +334,7 @@ function buildMapChart() {
   google.charts.setOnLoadCallback(drawMarkersMap);
 
   function drawMarkersMap() {
-    var data = google.visualization.arrayToDataTable(mapData);
+    var dataSet = google.visualization.arrayToDataTable(data);
 
     var options = {
       magnifyingGlass: {enable: true, zoomFactor: 7.5},
@@ -322,7 +346,7 @@ function buildMapChart() {
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('mapChart-div'));
-    chart.draw(data, options);
+    chart.draw(dataSet, options);
   };
 
 }
@@ -379,41 +403,26 @@ function sortCards() {
 function buildCard(cardData, mpData){
     let emojiStars = '&#x2b50;';
     for (let i = 0; i < cardData.stars - 1; i++) { emojiStars += '&#x2b50;' };
-    return  '<div class="card">'+
-              '<div class="header border">'+
-                '<a href="http://www.mountainproject.com/route/' + mpData.id + '/"><img src="'+ mpData.imgMedium + '"></a>'+
-                '<div class="largeFont routeName">' + cardData.route + '</div>' +
+    return  '<div class="card col-md-3 col-sm-2 col-xs-1">'+
+              '<div class="card-header">'+
+                '<div class="routeImage justify-content-center row"><a href="http://www.mountainproject.com/route/' + mpData.id + '/"><img src="'+ mpData.imgMedium + '"></a></div>'+
+                '<div class="routeName largeFont text-center">' + cardData.route + '</div>' +
               '</div>' +
-              '<div class="stats border">' +
-                '<div class="statsHolder box">' +
-                  '<div class="largeFont">' + emojiStars + '</div>' +
-                '</div>' +
-                '<div class="ratingContainer border">' +
+              '<div class="stats">' +
+                '<div class="routeStars largeFont row">' + emojiStars + '</div>' +
+
+                '<div class="ratingContainer row">' +
                   '<div class="largeFont">' + cardData.grade + cardData.gradeModifier + '</div>' +
-                  '<div class="regularFont">' + cardData.protection + '</div>' +
+                  '<div class="regularFont d-flex align-self-end" style="margin-bottom: 8px; margin-left: 5px;">' + cardData.protection + '</div>' +
                 '</div>' +
-                '<div class="dateContainer">'+
-                  '<div class="regularFont">' + cardData.date + '</div>' +
-                  '<div class="regularFont">' + cardData.type + '</div>' +
+
+                '<div class="dateContainer row">'+
+                  '<div class="regularFont text-left col-sm">' + cardData.date + '</div>' +
+                  '<div class="regularFont text-right col-sm">' + cardData.type + '</div>' +
                 '</div>' +
+
               '</div>' +
-            '</div>'
-                /*'</div>' +
-              '</div>' +
-              '<div class="statsHolder">'+
-                '<div class="regularFont">' + cardData.date + '</div>' +
-              '</div>' +
-              '<div class="stats border">'+
-                '<div class="statsHolder">'+
-                '</div>'+
-              '</div>' +
-              '<div class="interests">'+
-                '<div class="heading">Data Interests</div>'+
-                '<div class="tagHolder">'+
-                    cardData.dataInterest.map(tag => '<div class="tag">'+tag+'</div>');
-                '</div>'+
-              '</div>'+
-            '</div>'*/;
+            '</div>';
     emojiStars = '';
 }
 

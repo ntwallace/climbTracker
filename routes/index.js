@@ -3,17 +3,17 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 // our db model
-var Animal = require("../models/model.js");
+var Climb = require("../models/model.js");
 
 // simple route to render am HTML form that can POST data to our server
 // NOTE that this is not a standard API route, and is really for testing
-router.get('/create-pet', function(req,res){
+router.get('/add', function(req,res){
   res.render('pet-form.html')
 })
 
 // simple route to render an HTML page that pulls data from our server and displays it on a page
 // NOTE that this is not a standard API route, and is really for testing
-router.get('/show-pets', function(req,res){
+router.get('/show', function(req,res){
   res.render('show-pets.html')
 })
 
@@ -24,9 +24,9 @@ router.get('/show-pets', function(req,res){
  * @return {Object} json
  */
 router.get('/', function(req, res) {
-  
+
   var jsonData = {
-  	'name': 'node-express-api-boilerplate',
+  	'name': 'climb-tracker',
   	'api-status':'OK'
   }
 
@@ -51,50 +51,64 @@ router.post('/api/create', function(req, res){
     console.log(req.body);
 
     // pull out the information from the req.body
-    var name = req.body.name;
-    var age = req.body.age;
-    var tags = req.body.tags.split(","); // split string into array
-    var weight = req.body.weight;
-    var color = req.body.color;
-    var url = req.body.url;
+    var name = req.body.date;
+    var age = req.body.location.split(",");
+    var route = req.body.route = reqreq.body.route;
+    var grade = req.body.grade.split(",");
+    var type = req.body.type;
+    var myRole = req.body.myRole;
+    var partner = req.body.partner;
+    var stars = req.body.stars;
+    var repeats = req.body.repeats;
+    var notes = req.body.notes;
 
     // hold all this data in an object
-    // this object should be structured the same way as your db model
-    var animalObj = {
-      name: name,
-      age: age,
-      tags: tags,
-      description: {
-        weight: weight,
-        color: color
+    var climbObj = {
+      date: date,
+      location: {
+        location1: location1,
+        location2: location2,
+        location3: location3,
+        location4: location4
       },
-      url: url
+      route: tags,
+      grade: {
+        number: number,
+        modifier: modifier,
+        protection: protection
+      },
+      type: type,
+      myRole: myRole,
+      partner: partner,
+      stars: stars,
+      repeats: repeats,
+      notes: notes
     };
 
     // create a new animal model instance, passing in the object
-    var animal = new Animal(animalObj);
+    var climb = new Climb(climbObj);
 
     // now, save that animal instance to the database
-    // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
-    animal.save(function(err,data){
+    // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save
+    climb.save(function(err,data){
       // if err saving, respond back with error
       if (err){
-        var error = {status:'ERROR', message: 'Error saving animal'};
+        var error = {status:'ERROR', message: 'Error adding climb'};
         return res.json(error);
       }
 
-      console.log('saved a new animal!');
+      console.log('Climb successfully saved!');
       console.log(data);
 
-      // now return the json data of the new animal
+      // now return the json data of the new climb
       var jsonData = {
         status: 'OK',
-        animal: data
+        climb: data
       }
 
       return res.json(jsonData);
 
-    })  
+    })
 });
 
 // /**
@@ -109,22 +123,22 @@ router.get('/api/get/:id', function(req, res){
   var requestedId = req.params.id;
 
   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
-  Animal.findById(requestedId, function(err,data){
+  Climb.findById(requestedId, function(err,data){
 
-    // if err or no user found, respond with error 
+    // if err or no user found, respond with error
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that animal'};
+      var error = {status:'ERROR', message: 'Could not find climb'};
        return res.json(error);
     }
 
     // otherwise respond with JSON data of the animal
     var jsonData = {
       status: 'OK',
-      animal: data
+      climb: data
     }
 
     return res.json(jsonData);
-  
+
   })
 })
 
@@ -137,19 +151,19 @@ router.get('/api/get/:id', function(req, res){
 router.get('/api/get', function(req, res){
 
   // mongoose method to find all, see http://mongoosejs.com/docs/api.html#model_Model.find
-  Animal.find(function(err, data){
-    // if err or no animals found, respond with error 
+  Climb.find(function(err, data){
+    // if err or no animals found, respond with error
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find animals'};
+      var error = {status:'ERROR', message: 'Could not find climbs'};
       return res.json(error);
     }
 
-    // otherwise, respond with the data 
+    // otherwise, respond with the data
 
     var jsonData = {
       status: 'OK',
-      animals: data
-    } 
+      climbs: data
+    }
 
     res.json(jsonData);
 
@@ -169,8 +183,8 @@ router.get('/api/search', function(req,res){
   console.log("we are searching for " + searchTerm);
 
   // let's find that animal
-  Animal.find({name: searchTerm}, function(err,data){
-    // if err, respond with error 
+  Climb.find({name: searchTerm}, function(err,data){
+    // if err, respond with error
     if(err){
       var error = {status:'ERROR', message: 'Something went wrong'};
       return res.json(error);
@@ -178,18 +192,18 @@ router.get('/api/search', function(req,res){
 
     //if no animals, respond with no animals message
     if(data==null || data.length==0){
-      var message = {status:'NO RESULTS', message: 'We couldn\'t find any results'};
-      return res.json(message);      
+      var message = {status:'NO RESULTS', message: 'We couldn\'t find any climbs matching that name'};
+      return res.json(message);
     }
 
-    // otherwise, respond with the data 
+    // otherwise, respond with the data
 
     var jsonData = {
       status: 'OK',
-      animals: data
-    } 
+      climbs: data
+    }
 
-    res.json(jsonData);        
+    res.json(jsonData);
   })
 
 })
@@ -202,14 +216,14 @@ router.get('/api/search', function(req,res){
 //  * @return {Object} JSON
 //  */
 
-router.post('/api/update/:id', function(req, res){
+/*router.post('/api/update/:id', function(req, res){
 
    var requestedId = req.params.id;
 
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var name, age, weight, color, url; 
+    var name, age, weight, color, url;
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -252,7 +266,7 @@ router.post('/api/update/:id', function(req, res){
     console.log('the data to update is ' + JSON.stringify(dataToUpdate));
 
     // now, update that animal
-    // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate  
+    // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
     Animal.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
       // if err saving, respond back with error
       if (err){
@@ -274,6 +288,7 @@ router.post('/api/update/:id', function(req, res){
     })
 
 })
+*/
 
 /**
  * GET '/api/delete/:id'
@@ -282,7 +297,7 @@ router.post('/api/update/:id', function(req, res){
  * @return {Object} JSON
  */
 
-router.get('/api/delete/:id', function(req, res){
+/*router.get('/api/delete/:id', function(req, res){
 
   var requestedId = req.params.id;
 
@@ -304,5 +319,6 @@ router.get('/api/delete/:id', function(req, res){
   })
 
 })
+*/
 
 module.exports = router;
