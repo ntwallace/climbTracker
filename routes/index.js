@@ -142,6 +142,27 @@ router.get('/api/get/:id', function(req, res){
   })
 })
 
+router.get('/api/max', function(req, res){
+  Climb
+    .find({ 'route.type': 'Sport' })
+    //.find(myRole : 'Lead')
+    .sort('-grade.number')
+    .limit(1)
+    .exec(function (err, data) {
+      if(err || data == null){
+        var error = {status:'ERROR', message: 'Could not get max'};
+        return res.json(error);
+      }
+
+      var maxData = {
+        status: 'OK',
+        max: data
+      }
+
+      res.json(maxData);
+    });
+})
+
 // /**
 //  * GET '/api/get'
 //  * Receives a GET request to get all animal details
@@ -176,7 +197,7 @@ router.get('/api/get', function(req, res){
 //  * Receives a GET request to search an animal
 //  * @return {Object} JSON
 //  */
-router.get('/api/search', function(req,res){
+/*router.get('/api/search', function(req,res){
 
   // first use req.query to pull out the search query
   var searchTerm = req.query.name;
@@ -206,7 +227,7 @@ router.get('/api/search', function(req,res){
     res.json(jsonData);
   })
 
-})
+})*/
 
 // /**
 //  * POST '/api/update/:id'

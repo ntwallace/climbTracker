@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// See http://mongoosejs.com/docs/schematypes.html
-
 var climbSchema = new Schema({
   date: Date,
   location: {
@@ -17,7 +15,7 @@ var climbSchema = new Schema({
     modifier: String,
     protection: String
   },
-  type: String,
+  climbType: String,
   myRole: String,
   partner: String,
   stars: Number,

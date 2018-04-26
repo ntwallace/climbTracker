@@ -1,0 +1,21 @@
+TO FIX
+==========
+
+[ ] Fix initMap request to < 50/sec
+    - not possible without caching data
+[ ] Fix int/5.10 issue
+[x] Fix card date
+[x] Bug w/ toggling active CSS class on navbar items
+
+
+TO DO
+==========
+
+[ ] How to do aggregates in Mongo/Mongoose?
+  - SELECT type, MAX(grade) FROM data GROUP BY type;
+  - https://docs.mongodb.com/manual/aggregation/
+  - https://docs.mongodb.com/manual/reference/operator/aggregation/max/
+  - http://mongoosejs.com/docs/queries.html
+[ ] Create icons for Sport/Trad/Boulder/TR/Solo
+[ ] SPIKE: Add account/login functionality
+  - passport.js, http://www.passportjs.org/packages/

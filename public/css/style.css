@@ -8,6 +8,10 @@ body {
     font-family: 'Cabin', sans-serif;
 }
 
+input, button {
+  display: block;
+}
+
 
 .title {
   font-size: 35px;
@@ -38,10 +42,9 @@ body {
     border: 1px solid #E9EAEE;
     border-radius: 8px;
     max-width: 360px;
-    min-width: 320px;
-    margin-right: 16px;
+    min-width: 300px;
+    margin-right: 30px;
     margin-top: 16px;
-
     padding: 16px;
     text-align: center;
 }
@@ -82,6 +85,7 @@ body {
 .cards {
   background: #bbb;
   margin-top: 0;
+  padding-bottom: 20px;
 }
 
 .card {
@@ -143,6 +147,38 @@ body {
 
 .dateContainer {
     padding-top: 15px;
+}
+
+.upload {
+  background: #bbb;
+  margin-top: 0;
+  padding-bottom: 20px;
+}
+
+.uploadContainer {
+  padding: 20px;
+}
+
+.uploadHeader {
+  font-weight:500;
+  background-color: #343a40;
+  color: #fff;
+  margin: 0 36px;
+  padding: 10px 0 10px 20px;
+}
+
+.uploadBody {
+  background: #fff;
+  margin: 0 36px 10px 36px;
+}
+
+
+.formRow {
+  margin-top: 10px;
+}
+
+.smallFont {
+  font-size: 12px;
 }
 
 .regularFont {

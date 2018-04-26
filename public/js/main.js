@@ -1,252 +1,63 @@
-let jsonData = [
-  {
-    "date": 2016,
-    "mountainProjectID": 105888225,
-    "route": "Bunny",
-    "grade": 5.4,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": 2016,
-    "mountainProjectID": 106099552,
-    "route": "Harvard",
-    "grade": 5.4,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": 2016,
-    "mountainProjectID": 106034654,
-    "route": "Easy Overhang",
-    "grade": 5.2,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 2,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 105810464,
-    "route": "Laurel",
-    "grade": 5.7,
-    "gradeModifier": "",
-    "protection": "G",
-    "type": "Tope Rope",
-    "myRole": "TR",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 1,
-    "notes": ""
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 105810485,
-    "route": "Rhododendron",
-    "grade": 5.6,
-    "gradeModifier": "",
-    "protection": "G",
-    "type": "Top Rope",
-    "myRole": "TR",
-    "partner": "Justin Cina",
-    "stars": 2,
-    "repeats": 1,
-    "notes": ""
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 105954124,
-    "route": "High Corner",
-    "grade": 5.5,
-    "gradeModifier": "",
-    "protection": "PG-13",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 1,
-    "repeats": 0,
-    "notes": "P1 only"
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 106089237,
-    "route": "Grim-Ace Face",
-    "grade": 5.9,
-    "gradeModifier": "+",
-    "protection": "R",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 0,
-    "notes": "P2 only"
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 105968655,
-    "route": "Dennis",
-    "grade": 5.5,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": 2017,
-    "mountainProjectID": 105799108,
-    "route": "Three Pines",
-    "grade": 5.3,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 2,
-    "repeats": 1,
-    "notes": ""
-  },
-  {
-    "date": "6/10/17",
-    "mountainProjectID": 105798994,
-    "route": "High Exposure",
-    "grade": 5.6,
-    "gradeModifier": "+",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 5,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": "6/15/17",
-    "mountainProjectID": 105815029,
-    "route": "Middle Earth",
-    "grade": 5.6,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Second",
-    "partner": "Justin Cina",
-    "stars": 3,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": "6/21/17",
-    "mountainProjectID": 105920873,
-    "route": "Betty",
-    "grade": 5.4,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Lead",
-    "partner": "Chris Doty",
-    "stars": 4,
-    "repeats": 2,
-    "notes": "P2 variation (5.4)"
-  },
-  {
-    "date": "6/22/17",
-    "mountainProjectID": 105812940,
-    "route": "Jackie",
-    "grade": 5.5,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Lead",
-    "partner": "Chris Doty",
-    "stars": 4,
-    "repeats": 0,
-    "notes": ""
-  },
-  {
-    "date": "2/21/18",
-    "mountainProjectID": 106101970,
-    "route": "Belly Roll",
-    "grade": 5.4,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Lead",
-    "partner": "Mike Kim",
-    "stars": 3,
-    "repeats": 1,
-    "notes": ""
-  },
-  {
-    "date": "4/13/18",
-    "mountainProjectID": 105968655,
-    "route": "Dennis",
-    "grade": 5.5,
-    "gradeModifier": "",
-    "protection": "PG",
-    "type": "Trad",
-    "myRole": "Lead",
-    "partner": "Chris",
-    "stars": 3,
-    "repeats": 1,
-    "notes": ""
-  }
-]
-
 let sortBy = 'route';
 let sortOrder = 'descending';
 
 function showDash() {
   $('.cards').css('display', 'none');
+  $('.upload').css('display', 'none');
   $('.dashboard').css('display', '');
-  $('#dashboard-link').toggleClass('active');
-  $('#cards-link').toggleClass('active');
+  if (!$('.dashboard').hasClass('active')) {
+    $('#dashboard-link').addClass('active');
+    $('#cards-link').removeClass('active');
+    $('#upload-link').removeClass('active');
+  }
 }
 
 function showCards() {
   $('.dashboard').css('display', 'none');
+  $('.upload').css('display', 'none');
   $('.cards').css('display', '');
-  $('#cards-link').toggleClass('active');
-  $('#dashboard-link').toggleClass('active');
+  if (!$('.cards').hasClass('active')) {
+    $('#dashboard-link').removeClass('active');
+    $('#cards-link').addClass('active');
+    $('#upload-link').removeClass('active');
+  }
+}
+
+function showUpload() {
+  $('.dashboard').css('display', 'none');
+  $('.cards').css('display', 'none');
+  $('.upload').css('display', '');
+  if (!$('.upload').hasClass('active')) {
+    $('#dashboard-link').removeClass('active');
+    $('#cards-link').removeClass('active');
+    $('#upload-link').addClass('active');
+  }
 }
 
 function init() {
-  //let jsonData = getData();
+  let jsonData = getData();
   renderCharts(jsonData);
   renderCards(jsonData);
 }
 
 function getData() {
+  let climbs;
+
   $.getJSON('/api/get', function(data) {
-      console.log(data);
-      return data;
+      climbs = data.climbs
   });
+
+  return climbs;
 }
 
 function renderCharts(data){
   let { barData, donutData, mapData } = buildChartData(data);
   buildBarChart(barData);
   buildDonutChart(donutData);
-  buildMapChart(mapData);
+  initMap(mapData);
 }
+
+
 
 function buildChartData(data) {
   let chartData = {
@@ -255,13 +66,17 @@ function buildChartData(data) {
     mapData: []
   };
 
+  let latLong = {};
+
   let tradCount = 0, sportCount = 0, trCount = 0;
   chartData.barData.push(['Route', 'Grade']);
   chartData.donutData.push(['Route', 'Type']);
-  chartData.mapData.push(['City', 'Count']);
 
   data.forEach(function(e) {
     chartData.barData.push([e.route, e.grade]);
+
+    latLong = getLatLong(e.mountainProjectID);
+    chartData.mapData.push(latLong);
 
     if (e.type == "Trad") {
       tradCount++;
@@ -273,7 +88,6 @@ function buildChartData(data) {
   });
 
   chartData.donutData.push(['Sport', sportCount],['Trad', tradCount],['TR', trCount]);
-  chartData.mapData.push(['New Paltz, NY', data.length]);
 
   return chartData;
 }
@@ -290,15 +104,15 @@ function buildBarChart(data) {
       colors: ['#4285F4'],
 
       hAxis: {
-        ticks: [5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
+        ticks: [5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9]
       },
 
       label: {position: 'top', textStyle: {color: 'black', fontSize: 16}},
 
       histogram: {
         bucketSize: 0.1,
-        maxNumBuckets: 100,
-        minValue: 5.1,
+        maxNumBuckets: 50,
+        minValue: 5.0,
         maxValue: 5.9
       }
     };
@@ -326,10 +140,52 @@ function buildDonutChart(data) {
   }
 }
 
-function buildMapChart(data) {
+function initMap(data) {
+  var map = new google.maps.Map(document.getElementById('mapChart-div'), {
+    zoom: 3.5,
+    center: {lat: 39.468, lng: -96.951}
+  });
+  var geocoder = new google.maps.Geocoder;
+  var infowindow = new google.maps.InfoWindow;
+
+  data.forEach(function(e) {
+    let latLong = {
+      lat: e.lat,
+      long: e.long
+    };
+    //console.log(e);
+    geocodeLatLng(latLong, geocoder, map, infowindow);
+  });
+}
+
+function geocodeLatLng(latLong, geocoder, map, infowindow) {
+  var latlng = {lat: parseFloat(latLong.lat), lng: parseFloat(latLong.long)};
+  //console.log(latlng)
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    //console.log('got back from geocode')
+    if (status === 'OK') {
+      if (results[3]) {
+        //map.setZoom(11);
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map
+        });
+        infowindow.setContent(results[3].formatted_address);
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+}
+
+/*function buildMapChart(data) {
+  console.log(data);
   google.charts.load('current', {
        'packages': ['geochart'],
-       'mapsApiKey': ' AIzaSyB--A0zLqbECZkdTGg6cQaIdz9HQ4lB53I'
+       'mapsApiKey': 'AIzaSyB--A0zLqbECZkdTGg6cQaIdz9HQ4lB53I'
      });
   google.charts.setOnLoadCallback(drawMarkersMap);
 
@@ -338,7 +194,7 @@ function buildMapChart(data) {
 
     var options = {
       magnifyingGlass: {enable: true, zoomFactor: 7.5},
-      region: 'US-NY',
+      region: 'US',
       resolution: 'provinces',
       displayMode: 'markers',
       colorAxis: {colors: ['#232F5B']},
@@ -349,17 +205,15 @@ function buildMapChart(data) {
     chart.draw(dataSet, options);
   };
 
-}
+}*/
 
 function renderCards(data) {
-    let addMonthDay = '12/31/'
-    for (i = 0; i < data.length; i++) {
-      if (typeof data[i].date != 'string') data[i].date = addMonthDay + data[i].date.toString().substring(2); // turn YYYY number into MM/DD/YY string
-      let id = data[i].mountainProjectID
-      let mp = getMountainProjectData(id);
-      let card = buildCard(data[i], mp);
+  for (i = 0; i < data.length; i++) {
+    let id = data[i].mountainProjectID
+    let mp = getMountainProjectData(id);
+    let card = buildCard(data[i], mp);
 
-      $("#cardHolder").append(card);
+    $("#cardHolder").append(card);
   }
 }
 
@@ -377,7 +231,25 @@ function getMountainProjectData(id) {
   return output;
 }
 
+function getLatLong(id) {
+  let key = '112078870-2946e2b90eda472c67028f263ebccd88';
+  let url ='https://www.mountainproject.com/data/get-routes?routeIds=' + id + '&key=' + key;
+  let latLong = {
+    lat: String,
+    long: String
+  };
+
+  $.getJSON(url, function (data) {
+    latLong.lat = data.routes[0].latitude;
+    latLong.long = data.routes[0].longitude;
+ });
+
+ return latLong;
+}
+
 function sortCards() {
+  data = getData();
+
   if (sortBy === $('#sortBy').val() && sortOrder === $('#sortOrder').val()){
     return;
   } else {
@@ -388,7 +260,7 @@ function sortCards() {
   let aName = 'a.' + sortBy;
   let bName = 'b.' + sortBy;
   console.log(bName);
-  jsonData.sort(function(a,b){
+  data.sort(function(a,b){
     if(sortOrder === 'descending') {
       return b[sortBy] > a[sortBy];
     } else {
@@ -397,11 +269,16 @@ function sortCards() {
   });
 
   $('#cardHolder').empty();
-  renderCards(jsonData);
+  renderCards(data);
 }
 
 function buildCard(cardData, mpData){
     let emojiStars = '&#x2b50;';
+    let date;
+
+    if (typeof cardData.date != 'string') date = '12/31/' + data[i].date.toString().substring(2); // turn YYYY number into MM/DD/YY string
+    date =  new Date(cardData.date).toLocaleDateString("en-US");
+
     for (let i = 0; i < cardData.stars - 1; i++) { emojiStars += '&#x2b50;' };
     return  '<div class="card col-md-3 col-sm-2 col-xs-1">'+
               '<div class="card-header">'+
@@ -417,7 +294,7 @@ function buildCard(cardData, mpData){
                 '</div>' +
 
                 '<div class="dateContainer row">'+
-                  '<div class="regularFont text-left col-sm">' + cardData.date + '</div>' +
+                  '<div class="regularFont text-left col-sm">' + date + '</div>' +
                   '<div class="regularFont text-right col-sm">' + cardData.type + '</div>' +
                 '</div>' +
 

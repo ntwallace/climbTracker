@@ -28,8 +28,11 @@
               <li id="dashboard-link" class="nav-item active">
                   <a class="nav-link" href="#" class="option" onclick="showDash()">Dashboard</a>
               </li>
-              <li id="cards-link" class="nav-item" style="margin-right:30px;">
+              <li id="cards-link" class="nav-item">
                   <a class="nav-link" href="#" class="option" onclick="showCards()">Cards</a>
+              </li>
+              <li id="upload-link" class="nav-item" style="margin-right:30px;">
+                  <a class="nav-link" href="#" class="option" onclick="showUpload()">Add A Climb</a>
               </li>
             </ul>
           </div>
@@ -37,8 +40,8 @@
 
         <!-- Dashboard -->
         <div class="dashboard">
-          <div id="row1" class="dashboard row">
-            <div class="dashboard-card">
+          <div id="row1" class="dashboard row" style="padding-left:30px; flex-wrap: nowrap;">
+            <div class="col-md dashboard-card">
               <div class="row justify-content-center">
                 <div class="extraLargeFont">5.10</div><div class="mediumFont d-flex align-self-end" style="margin-bottom: 10px;">c</div>
               </div>
@@ -54,7 +57,7 @@
                 <div class="regularFont">Trad</div>
               </div>
             </div>
-            <div class="col-md dashboard-card">
+            <div class="col-md dashboard-card" style="margin-right: 12px;">
               <div class="row justify-content-center">
                 <div class="mediumFont d-flex align-self-end" style="margin-bottom: 10px; margin-right: 4px;">v</div><div class="extraLargeFont">4</div>
               </div>
@@ -97,6 +100,72 @@
           <div id="cardHolder"></div>
         </div>
 
+        <!-- Upload area -->
+        <div class="upload" style="display: none;">
+          <div class="uploadContainer">
+            <div class="row" style="padding-top: 30px;">
+              <div class="mediumFont uploadHeader bg-secondary col-md">Tick List</div>
+            </div>
+            <div class="uploadBody">
+              <div class="row">
+                <div class="regularFont col-md" style="margin: 10px;margin-top: 30px;">
+                  Upload a ticklist of climbs as a CSV file matching <a href="#">this</a> file format.
+                </div>
+                <br />
+              </div>
+              <div class="row">
+                <div class="col-md" style="margin: 10px;margin-bottom: 30px;">
+                    <form id="uploadForm"
+                      enctype="multipart/form-data"
+                      action="/api/upload"
+                      method="post"
+                      style="">
+                      <input type="file" name="userUpload" multiple />
+                    </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="padding-top: 30px;">
+              <div class="mediumFont uploadHeader bg-secondary col-md">Single Climb</div>
+            </div>
+            <div class="uploadBody">
+              <div class="row">
+                <div class="regularFont col-md" style="margin: 10px;margin-top: 30px;">
+                  Manually add a climb by completing the form.
+                </div>
+                <br />
+              </div>
+              <div class="row">
+                <div class="col-md" style="margin-bottom: 30px;">
+                    <form id="addForm"
+                      enctype="multipart/form-data"
+                      action="/api/add"
+                      method="post"
+                      style="margin: 10px;">
+                      <div class="smallFont formRow">Date</div>
+                      <input type="date">
+
+                      <div class="smallFont formRow">Mountain Project ID</div>
+                      <input type="text" placeholder="ID">
+
+                      <div class="smallFont formRow">Style</div>
+                      <select name="style" id="style">
+                        <option value="lead">Lead</option>
+                        <option value="follow">Follow</option>
+                        <option value="tr">Top Rope</option>
+                      </select>
+
+                      <div class="smallFont formRow"> </div>
+                      <br />
+                      <button id="addSubmit" onclick="">Submit</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
   </body>
 
@@ -107,5 +176,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="js/main.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB--A0zLqbECZkdTGg6cQaIdz9HQ4lB53I&callback=initMap"></script>
+
 
 </html>
